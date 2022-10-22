@@ -3,15 +3,13 @@ import 'package:flutter/material.dart';
 class AppTextField extends StatelessWidget {
   final String hintText;
   final Icon? suffixIcon;
-  const AppTextField({
-    super.key,
-    this.hintText = '',
-    this.suffixIcon,
-  });
+  final TextEditingController? controller;
+  const AppTextField(
+      {super.key, this.hintText = '', this.suffixIcon, this.controller});
 
   @override
   Widget build(BuildContext context) {
-    return TextField(
+    return TextFormField(
       decoration: InputDecoration(
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(10.0),

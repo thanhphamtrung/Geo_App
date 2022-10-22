@@ -6,5 +6,5 @@ class LoginConst {
   static String forgotPassword = 'Forgot Password?';
   static String signIn = 'Sign in';
   static String signUp = 'Sign up';
-  static String dontHaveAcount = 'Don\'t have an account?';
+  static String dontHaveAccount = 'Don\'t have an account?';
 }

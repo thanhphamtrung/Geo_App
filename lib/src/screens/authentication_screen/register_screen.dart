@@ -5,7 +5,7 @@ import 'package:get/get.dart';
 import '../../controllers/authentication_controllers/register_controller.dart';
 import '../../cores/constants/app_assets.dart';
 import '../../cores/constants/app_colors.dart';
-import '../../cores/constants/string_consts.dart';
+import '../../cores/constants/string_const.dart';
 import '../../cores/routes/app_pages.dart';
 import '../../widgets/app_text_field.dart';
 import '../../widgets/rounded_button.dart';
@@ -15,6 +15,7 @@ class RegisterScreen extends GetView<RegisterController> {
 
   @override
   Widget build(BuildContext context) {
+    final _formKey = GlobalKey<FormState>();
     return Material(
       child: SafeArea(
         child: Padding(
@@ -31,24 +32,31 @@ class RegisterScreen extends GetView<RegisterController> {
                       child: Image.asset(ImageAssetsPath.logo)),
                 ),
               ),
-              AppTextField(
-                hintText: LoginConst.email,
+              Form(
+                key: _formKey,
+                child: Column(
+                  children: [
+                    AppTextField(
+                      hintText: LoginConst.email,
+                    ),
+                    const SizedBox(height: 16),
+                    AppTextField(
+                      hintText: LoginConst.fullName,
+                    ),
+                    const SizedBox(height: 16),
+                    AppTextField(
+                      hintText: LoginConst.password,
+                      suffixIcon: const Icon(Icons.visibility_off_rounded),
+                    ),
+                    const SizedBox(height: 16),
+                    AppTextField(
+                      hintText: LoginConst.confirmPassword,
+                      suffixIcon: const Icon(Icons.visibility_off_rounded),
+                    ),
+                    const SizedBox(height: 16),
+                  ],
+                ),
               ),
-              const SizedBox(height: 16),
-              AppTextField(
-                hintText: LoginConst.fullName,
-              ),
-              const SizedBox(height: 16),
-              AppTextField(
-                hintText: LoginConst.password,
-                suffixIcon: const Icon(Icons.visibility_off_rounded),
-              ),
-              const SizedBox(height: 16),
-              AppTextField(
-                hintText: LoginConst.confirmPassword,
-                suffixIcon: const Icon(Icons.visibility_off_rounded),
-              ),
-              const SizedBox(height: 16),
               Center(
                 child: RoundedButton(
                   onPressed: () {},
@@ -60,7 +68,7 @@ class RegisterScreen extends GetView<RegisterController> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Text(LoginConst.dontHaveAcount),
+                  Text(LoginConst.dontHaveAccount),
                   TextButton(
                     onPressed: () {
                       Get.toNamed(Routes.login);

@@ -1,11 +1,13 @@
 class UserModel {
-  String email;
-  String password;
-  String fullName;
+  final String? email;
+  final String? password;
+  final String? fullName;
+  final String? confirmCode;
 
   UserModel({
-    required this.email,
-    required this.password,
-    required this.fullName,
+    this.email,
+    this.password,
+    this.fullName,
+    this.confirmCode,
   });
 }

@@ -58,3 +58,4 @@ macos/Podfile
 *.xcworkspacedata
 *.xcworkspacedata
 *.pbxproj
+.vscode/settings.json

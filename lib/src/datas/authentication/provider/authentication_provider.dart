@@ -12,13 +12,11 @@ class AuthenticationProvider implements IAuthenticationProvider {
   }) async {
     try {
       final userAttributes = <CognitoUserAttributeKey, String>{
-        CognitoUserAttributeKey.email: 'email@domain.com',
-        CognitoUserAttributeKey.phoneNumber: '+15559101234',
-        // additional attributes as needed
+        CognitoUserAttributeKey.name: fullName,
       };
       final result = await Amplify.Auth.signUp(
-        username: 'myusername',
-        password: 'mysupersecurepassword',
+        username: email,
+        password: password,
         options: CognitoSignUpOptions(userAttributes: userAttributes),
       );
       return result;
@@ -26,6 +24,36 @@ class AuthenticationProvider implements IAuthenticationProvider {
       safePrint(e.message);
 
       // Return [null] if sign up fail.
+      return null;
+    }
+  }
+
+  @override
+  Future<SignInResult?> emailSignIn(
+      {required String email, required String password}) async {
+    try {
+      final result = await Amplify.Auth.signIn(
+        username: email,
+        password: password,
+      );
+      return result;
+    } on AuthException catch (e) {
+      safePrint(e.message);
+      // Return [null] if sign in fail.
+      return null;
+    }
+  }
+
+  @override
+  Future<SignUpResult?> emailSignUpConfirm(
+      {required String email, required String confirmCode}) async {
+    try {
+      final result = await Amplify.Auth.confirmSignUp(
+          username: email, confirmationCode: confirmCode);
+      return result;
+    } on AuthException catch (e) {
+      safePrint(e.message);
+      // Return [null] if confirm fail.
       return null;
     }
   }
