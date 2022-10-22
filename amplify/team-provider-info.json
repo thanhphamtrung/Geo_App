@@ -1,0 +1,15 @@
+{
+  "dev": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-geoapp-dev-122444-authRole",
+      "UnauthRoleArn": "arn:aws:iam::057581090346:role/amplify-geoapp-dev-122444-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::057581090346:role/amplify-geoapp-dev-122444-authRole",
+      "Region": "us-east-1",
+      "DeploymentBucketName": "amplify-geoapp-dev-122444-deployment",
+      "UnauthRoleName": "amplify-geoapp-dev-122444-unauthRole",
+      "StackName": "amplify-geoapp-dev-122444",
+      "StackId": "arn:aws:cloudformation:us-east-1:057581090346:stack/amplify-geoapp-dev-122444/cb16aa50-51c9-11ed-8093-0e9b6db2527b",
+      "AmplifyAppId": "d12193n0e7wish"
+    }
+  }
+}
