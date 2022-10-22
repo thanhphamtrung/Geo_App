@@ -51,3 +51,10 @@ ios/Flutter/Debug.xcconfig
 ios/Flutter/Release.xcconfig
 ios/Flutter/Debug.xcconfig
 *.xcconfig
+macos/Podfile
+*.lock
+*.pbxproj
+*.pbxproj
+*.xcworkspacedata
+*.xcworkspacedata
+*.pbxproj
