@@ -30,11 +30,11 @@ class LoginScreen extends GetView<LoginController> {
                 ),
               ),
               AppTextField(
-                hintText: LoginConst.email,
+                hintText: AuthenticationConst.email,
               ),
               const SizedBox(height: 16),
               AppTextField(
-                hintText: LoginConst.password,
+                hintText: AuthenticationConst.password,
                 suffixIcon: const Icon(Icons.visibility_off_rounded),
               ),
               const SizedBox(height: 16),
@@ -43,7 +43,7 @@ class LoginScreen extends GetView<LoginController> {
                     Get.toNamed(Routes.forgotPassword);
                   },
                   child: Text(
-                    LoginConst.forgotPassword,
+                    AuthenticationConst.forgotPassword,
                     style: TextStyle(
                         color: const Color(0xFF272727).withOpacity(0.5)),
                   )),
@@ -52,20 +52,20 @@ class LoginScreen extends GetView<LoginController> {
                 child: RoundedButton(
                   onPressed: () {},
                   isLarge: true,
-                  child: Text(LoginConst.signIn.toUpperCase()),
+                  child: Text(AuthenticationConst.signIn.toUpperCase()),
                 ),
               ),
               const SizedBox(height: 16),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Text(LoginConst.dontHaveAccount),
+                  Text(AuthenticationConst.dontHaveAccount),
                   TextButton(
                     onPressed: () {
                       Get.toNamed(Routes.register);
                     },
                     child: Text(
-                      LoginConst.signUp,
+                      AuthenticationConst.signUp,
                       style: TextStyle(
                         color: AppColors.secondaryColor,
                       ),

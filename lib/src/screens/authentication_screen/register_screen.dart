@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:geo_app/src/cores/validations/register_validation.dart';
 
 import 'package:get/get.dart';
 
@@ -15,7 +16,7 @@ class RegisterScreen extends GetView<RegisterController> {
 
   @override
   Widget build(BuildContext context) {
-    final _formKey = GlobalKey<FormState>();
+    final formKey = GlobalKey<FormState>();
     return Material(
       child: SafeArea(
         child: Padding(
@@ -33,25 +34,39 @@ class RegisterScreen extends GetView<RegisterController> {
                 ),
               ),
               Form(
-                key: _formKey,
+                key: formKey,
                 child: Column(
                   children: [
                     AppTextField(
-                      hintText: LoginConst.email,
+                      hintText: AuthenticationConst.email,
+                      onChanged: (value) {
+                        controller.user.update((user) {
+                          user?.email = value;
+                        });
+                      },
+                      validator: RegisterValidation().getEmailValidator(),
                     ),
                     const SizedBox(height: 16),
                     AppTextField(
-                      hintText: LoginConst.fullName,
+                      hintText: AuthenticationConst.fullName,
+                      onChanged: (value) {
+                        controller.user.update((user) {
+                          user?.fullName = value;
+                        });
+                      },
+                      validator: RegisterValidation().getFullNameValidator(),
                     ),
                     const SizedBox(height: 16),
                     AppTextField(
-                      hintText: LoginConst.password,
+                      hintText: AuthenticationConst.password,
                       suffixIcon: const Icon(Icons.visibility_off_rounded),
-                    ),
-                    const SizedBox(height: 16),
-                    AppTextField(
-                      hintText: LoginConst.confirmPassword,
-                      suffixIcon: const Icon(Icons.visibility_off_rounded),
+                      onChanged: (value) {
+                        controller.user.update((user) {
+                          user?.password = value;
+                        });
+                        // print('abc ${controller.user.value.password}');
+                      },
+                      validator: RegisterValidation().getPasswordValidator(),
                     ),
                     const SizedBox(height: 16),
                   ],
@@ -59,22 +74,26 @@ class RegisterScreen extends GetView<RegisterController> {
               ),
               Center(
                 child: RoundedButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    if (formKey.currentState!.validate()) {
+                      controller.signUp();
+                    }
+                  },
                   isLarge: true,
-                  child: Text(LoginConst.signIn.toUpperCase()),
+                  child: Text(AuthenticationConst.signUp.toUpperCase()),
                 ),
               ),
               const SizedBox(height: 16),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Text(LoginConst.dontHaveAccount),
+                  Text(AuthenticationConst.dontHaveAccount),
                   TextButton(
                     onPressed: () {
                       Get.toNamed(Routes.login);
                     },
                     child: Text(
-                      LoginConst.signIn,
+                      AuthenticationConst.signIn,
                       style: TextStyle(
                         color: AppColors.secondaryColor,
                       ),

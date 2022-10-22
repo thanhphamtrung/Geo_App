@@ -3,14 +3,22 @@ import 'package:flutter/material.dart';
 class AppTextField extends StatelessWidget {
   final String hintText;
   final Icon? suffixIcon;
-  final TextEditingController? controller;
-  const AppTextField(
-      {super.key, this.hintText = '', this.suffixIcon, this.controller});
+  final Function(String?)? onChanged;
+  final String? Function(String?)? validator;
+
+  const AppTextField({
+    super.key,
+    this.hintText = '',
+    this.suffixIcon,
+    this.onChanged,
+    this.validator,
+  });
 
   @override
   Widget build(BuildContext context) {
     return TextFormField(
       decoration: InputDecoration(
+        errorMaxLines: 2,
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(10.0),
         ),
@@ -20,6 +28,9 @@ class AppTextField extends StatelessWidget {
         fillColor: Colors.white70,
         suffixIcon: suffixIcon,
       ),
+      onChanged: onChanged,
+      validator: validator,
+      autovalidateMode: AutovalidateMode.onUserInteraction,
     );
   }
 }

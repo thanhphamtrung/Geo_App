@@ -1,6 +1,6 @@
 import 'package:amplify_flutter/amplify_flutter.dart';
 
-import '../../domains/adpaters/authentication_repo_adapter.dart';
+import '../../domains/adapters/authentication_repo_adapter.dart';
 import '../../domains/entity/user_model.dart';
 import '../models/confirm_sign_up_model.dart';
 import '../models/login_model.dart';

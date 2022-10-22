@@ -1,8 +1,9 @@
 class UserModel {
-  final String? email;
-  final String? password;
-  final String? fullName;
-  final String? confirmCode;
+  String? email;
+  String? password;
+  String? confirmPassword;
+  String? fullName;
+  String? confirmCode;
 
   UserModel({
     this.email,

@@ -1,6 +1,6 @@
 {
   "auth": {
-    "geoapp75bc345c": {
+    "geoappc97473d6c97473d6": {
       "service": "Cognito",
       "providerPlugin": "awscloudformation",
       "dependsOn": [],
@@ -8,14 +8,20 @@
       "frontendAuthConfig": {
         "socialProviders": [],
         "usernameAttributes": [
-          "PHONE_NUMBER"
-        ],
-        "signupAttributes": [
           "EMAIL"
         ],
+        "signupAttributes": [
+          "EMAIL",
+          "NAME"
+        ],
         "passwordProtectionSettings": {
-          "passwordPolicyMinLength": 8,
-          "passwordPolicyCharacters": []
+          "passwordPolicyMinLength": "6",
+          "passwordPolicyCharacters": [
+            "REQUIRES_LOWERCASE",
+            "REQUIRES_UPPERCASE",
+            "REQUIRES_NUMBERS",
+            "REQUIRES_SYMBOLS"
+          ]
         },
         "mfaConfiguration": "OFF",
         "mfaTypes": [
@@ -25,6 +31,21 @@
           "EMAIL"
         ]
       }
+    },
+    "userPoolGroups": {
+      "service": "Cognito-UserPool-Groups",
+      "providerPlugin": "awscloudformation",
+      "dependsOn": [
+        {
+          "category": "auth",
+          "resourceName": "geoappc97473d6c97473d6",
+          "attributes": [
+            "UserPoolId",
+            "AppClientIDWeb",
+            "AppClientID"
+          ]
+        }
+      ]
     }
   }
 }
