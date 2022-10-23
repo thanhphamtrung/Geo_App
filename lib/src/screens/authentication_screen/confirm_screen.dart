@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../../controllers/authentication_controllers/login_controller.dart';
+import '../../controllers/authentication_controllers/confirm_controller.dart';
 import '../../cores/constants/app_assets.dart';
 import '../../cores/constants/app_colors.dart';
 import '../../cores/constants/string_const.dart';
@@ -10,11 +10,12 @@ import '../../cores/validations/register_validation.dart';
 import '../../widgets/app_text_field.dart';
 import '../../widgets/rounded_button.dart';
 
-class LoginScreen extends GetView<LoginController> {
-  const LoginScreen({super.key});
+class ConfirmScreen extends GetView<ConfirmController> {
+  const ConfirmScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final formKey = GlobalKey<FormState>();
     return Material(
       child: SafeArea(
         child: Padding(
@@ -31,46 +32,43 @@ class LoginScreen extends GetView<LoginController> {
                       child: Image.asset(ImageAssetsPath.logo)),
                 ),
               ),
-              AppTextField(
-                hintText: AuthenticationConst.email,
-                validator: RegisterValidation().getEmailValidator(),
-                onChanged: (value) {
-                  controller.user.update((user) {
-                    user?.email = value;
-                  });
-                },
+              Form(
+                key: formKey,
+                child: Column(
+                  children: [
+                    AppTextField(
+                      hintText: AuthenticationConst.email,
+                      validator: RegisterValidation().getEmailValidator(),
+                      onChanged: (value) {
+                        controller.user.update((user) {
+                          user?.email = value;
+                        });
+                      },
+                    ),
+                    const SizedBox(height: 16),
+                    AppTextField(
+                      hintText: AuthenticationConst.confirmCode,
+                      onChanged: (value) {
+                        controller.user.update((user) {
+                          user?.confirmCode = value;
+                        });
+                      },
+                    ),
+                    const SizedBox(height: 16),
+                  ],
+                ),
               ),
-              const SizedBox(height: 16),
-              AppTextField(
-                hintText: AuthenticationConst.password,
-                suffixIcon: const Icon(Icons.visibility_off_rounded),
-                validator: RegisterValidation().getPasswordValidator(),
-                onChanged: (value) {
-                  controller.user.update((user) {
-                    user?.password = value;
-                  });
-                },
-              ),
-              const SizedBox(height: 16),
-              TextButton(
-                  onPressed: () {
-                    Get.toNamed(Routes.forgotPassword);
-                  },
-                  child: Text(
-                    AuthenticationConst.forgotPassword,
-                    style: TextStyle(
-                        color: const Color(0xFF272727).withOpacity(0.5)),
-                  )),
-              const SizedBox(height: 16),
               Center(
                 child: RoundedButton(
                   onPressed: () async {
-                    if (await controller.signIn()) {
-                      Get.toNamed(Routes.home);
+                    if (formKey.currentState!.validate()) {
+                      if (await controller.confirmAccount()) {
+                        Get.toNamed(Routes.login);
+                      }
                     }
                   },
                   isLarge: true,
-                  child: Text(AuthenticationConst.signIn.toUpperCase()),
+                  child: Text(AuthenticationConst.confirm.toUpperCase()),
                 ),
               ),
               const SizedBox(height: 16),
@@ -80,10 +78,10 @@ class LoginScreen extends GetView<LoginController> {
                   Text(AuthenticationConst.dontHaveAccount),
                   TextButton(
                     onPressed: () {
-                      Get.toNamed(Routes.register);
+                      Get.toNamed(Routes.login);
                     },
                     child: Text(
-                      AuthenticationConst.signUp,
+                      AuthenticationConst.signIn,
                       style: TextStyle(
                         color: AppColors.secondaryColor,
                       ),
