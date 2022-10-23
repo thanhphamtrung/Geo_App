@@ -7,13 +7,9 @@ class RegisterController extends GetxController {
 
   RegisterController({required this.authenticationRepository});
 
-  RxBool isSignUpComplete = false.obs;
   Rx<UserModel> user = UserModel().obs;
 
-  Future signUp() async {
-    bool result = await authenticationRepository.userSignUpByEmail(user.value);
-    if (result) {
-      isSignUpComplete = true.obs;
-    }
+  Future<bool> signUp() async {
+    return await authenticationRepository.userSignUpByEmail(user.value);
   }
 }

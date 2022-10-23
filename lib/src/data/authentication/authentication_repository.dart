@@ -63,9 +63,9 @@ class AuthenticationRepository implements IAuthenticationRepository {
       var signUpModel = ConfirmSignUpModel.convertUserModelToSignInModel(user);
 
       if (signUpModel != null) {
-        var signUpResult = await provider.emailSignIn(
+        var signUpResult = await provider.emailSignUpConfirm(
           email: signUpModel.email,
-          password: signUpModel.confirmCode,
+          confirmCode: signUpModel.confirmCode,
         );
         if (signUpResult != null) {
           return true;

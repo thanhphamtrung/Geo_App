@@ -1,18 +1,17 @@
 import 'package:flutter/material.dart';
-import 'package:geo_app/src/cores/validations/register_validation.dart';
-
 import 'package:get/get.dart';
 
-import '../../controllers/authentication_controllers/register_controller.dart';
+import '../../controllers/authentication_controllers/confirm_controller.dart';
 import '../../cores/constants/app_assets.dart';
 import '../../cores/constants/app_colors.dart';
 import '../../cores/constants/string_const.dart';
 import '../../cores/routes/app_pages.dart';
+import '../../cores/validations/register_validation.dart';
 import '../../widgets/app_text_field.dart';
 import '../../widgets/rounded_button.dart';
 
-class RegisterScreen extends GetView<RegisterController> {
-  const RegisterScreen({super.key});
+class ConfirmScreen extends GetView<ConfirmController> {
+  const ConfirmScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -39,33 +38,21 @@ class RegisterScreen extends GetView<RegisterController> {
                   children: [
                     AppTextField(
                       hintText: AuthenticationConst.email,
+                      validator: RegisterValidation().getEmailValidator(),
                       onChanged: (value) {
                         controller.user.update((user) {
                           user?.email = value;
                         });
                       },
-                      validator: RegisterValidation().getEmailValidator(),
                     ),
                     const SizedBox(height: 16),
                     AppTextField(
-                      hintText: AuthenticationConst.fullName,
+                      hintText: AuthenticationConst.confirmCode,
                       onChanged: (value) {
                         controller.user.update((user) {
-                          user?.fullName = value;
+                          user?.confirmCode = value;
                         });
                       },
-                      validator: RegisterValidation().getFullNameValidator(),
-                    ),
-                    const SizedBox(height: 16),
-                    AppTextField(
-                      hintText: AuthenticationConst.password,
-                      suffixIcon: const Icon(Icons.visibility_off_rounded),
-                      onChanged: (value) {
-                        controller.user.update((user) {
-                          user?.password = value;
-                        });
-                      },
-                      validator: RegisterValidation().getPasswordValidator(),
                     ),
                     const SizedBox(height: 16),
                   ],
@@ -75,13 +62,13 @@ class RegisterScreen extends GetView<RegisterController> {
                 child: RoundedButton(
                   onPressed: () async {
                     if (formKey.currentState!.validate()) {
-                      if (await controller.signUp()) {
-                        Get.toNamed(Routes.confirm);
+                      if (await controller.confirmAccount()) {
+                        Get.toNamed(Routes.login);
                       }
                     }
                   },
                   isLarge: true,
-                  child: Text(AuthenticationConst.signUp.toUpperCase()),
+                  child: Text(AuthenticationConst.confirm.toUpperCase()),
                 ),
               ),
               const SizedBox(height: 16),
