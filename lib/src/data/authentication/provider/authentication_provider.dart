@@ -32,6 +32,7 @@ class AuthenticationProvider implements IAuthenticationProvider {
   Future<SignInResult?> emailSignIn(
       {required String email, required String password}) async {
     try {
+      await Amplify.Auth.signOut();
       final result = await Amplify.Auth.signIn(
         username: email,
         password: password,

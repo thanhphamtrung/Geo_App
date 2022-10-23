@@ -1,6 +1,7 @@
-import 'package:geo_app/src/domains/adapters/authentication_repo_adapter.dart';
-import 'package:geo_app/src/domains/entity/user_model.dart';
 import 'package:get/get.dart';
+
+import '../../domains/adapters/authentication_repo_adapter.dart';
+import '../../domains/entity/user_model.dart';
 
 class RegisterController extends GetxController {
   final IAuthenticationRepository authenticationRepository;

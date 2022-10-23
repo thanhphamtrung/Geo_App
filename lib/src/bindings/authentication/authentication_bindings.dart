@@ -14,7 +14,7 @@ class AuthenticationBinding extends Bindings {
     Get.lazyPut<IAuthenticationProvider>(() => AuthenticationProvider());
     Get.lazyPut<IAuthenticationRepository>(
         () => AuthenticationRepository(provider: Get.find()));
-    Get.lazyPut(() => LoginController());
+    Get.lazyPut(() => LoginController(authenticationRepository: Get.find()));
     Get.lazyPut(() => RegisterController(authenticationRepository: Get.find()));
     Get.lazyPut(() => ConfirmController(authenticationRepository: Get.find()));
   }

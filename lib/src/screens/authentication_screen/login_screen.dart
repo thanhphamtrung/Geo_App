@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+
 import '../../controllers/authentication_controllers/login_controller.dart';
 import '../../cores/constants/app_assets.dart';
 import '../../cores/constants/app_colors.dart';
 import '../../cores/constants/string_const.dart';
 import '../../cores/routes/app_pages.dart';
+import '../../cores/validations/register_validation.dart';
 import '../../widgets/app_text_field.dart';
 import '../../widgets/rounded_button.dart';
 
@@ -31,11 +33,23 @@ class LoginScreen extends GetView<LoginController> {
               ),
               AppTextField(
                 hintText: AuthenticationConst.email,
+                validator: RegisterValidation().getEmailValidator(),
+                onChanged: (value) {
+                  controller.user.update((user) {
+                    user?.email = value;
+                  });
+                },
               ),
               const SizedBox(height: 16),
               AppTextField(
                 hintText: AuthenticationConst.password,
                 suffixIcon: const Icon(Icons.visibility_off_rounded),
+                validator: RegisterValidation().getPasswordValidator(),
+                onChanged: (value) {
+                  controller.user.update((user) {
+                    user?.password = value;
+                  });
+                },
               ),
               const SizedBox(height: 16),
               TextButton(
@@ -50,7 +64,11 @@ class LoginScreen extends GetView<LoginController> {
               const SizedBox(height: 16),
               Center(
                 child: RoundedButton(
-                  onPressed: () {},
+                  onPressed: () async {
+                    if (await controller.signIn()) {
+                      Get.toNamed(Routes.home);
+                    }
+                  },
                   isLarge: true,
                   child: Text(AuthenticationConst.signIn.toUpperCase()),
                 ),
