@@ -1,6 +1,6 @@
 [
     {
-        "RangeKm": 10,
+        "RangeKm": 50,
         "Latitude": -37.883761,
         "Longitude": 145.054682,
         "GeoHubTileDistance": {
