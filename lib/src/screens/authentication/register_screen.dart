@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:geo_app/src/cores/validations/register_validation.dart';
-
 import 'package:get/get.dart';
 
 import '../../controllers/authentication_controllers/register_controller.dart';
@@ -8,6 +6,7 @@ import '../../cores/constants/app_assets.dart';
 import '../../cores/constants/app_colors.dart';
 import '../../cores/constants/string_const.dart';
 import '../../cores/routes/app_pages.dart';
+import '../../cores/validations/register_validation.dart';
 import '../../widgets/app_text_field.dart';
 import '../../widgets/rounded_button.dart';
 
