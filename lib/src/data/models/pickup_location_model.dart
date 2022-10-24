@@ -1,4 +1,17 @@
-class PickupLocation {
+class ListPickupLocationModel {
+  List<PickupLocationModel>? listPickupLocationModel;
+  ListPickupLocationModel({
+    this.listPickupLocationModel,
+  });
+
+  factory ListPickupLocationModel.fromJson(List<dynamic> parsedJson) {
+    List<PickupLocationModel> list =
+        parsedJson.map((e) => PickupLocationModel.fromJson(e)).toList();
+    return ListPickupLocationModel(listPickupLocationModel: list);
+  }
+}
+
+class PickupLocationModel {
   int? rangeKm;
   double? latitude;
   double? longitude;
@@ -10,7 +23,7 @@ class PickupLocation {
   int? countShoppers;
   PriortyScore? priortyScore;
 
-  PickupLocation(
+  PickupLocationModel(
       {this.rangeKm,
       this.latitude,
       this.longitude,
@@ -22,7 +35,7 @@ class PickupLocation {
       this.countShoppers,
       this.priortyScore});
 
-  PickupLocation.fromJson(Map<String, dynamic> json) {
+  PickupLocationModel.fromJson(Map<String, dynamic> json) {
     rangeKm = json['RangeKm'];
     latitude = json['Latitude'];
     longitude = json['Longitude'];
