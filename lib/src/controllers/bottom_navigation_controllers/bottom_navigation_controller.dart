@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:latlong2/latlong.dart';
 
 import '../../bindings/home/home_bindings.dart';
 import '../../cores/routes/app_pages.dart';

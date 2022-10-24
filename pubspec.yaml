@@ -41,6 +41,8 @@ dependencies:
   amplify_auth_cognito: ^0.6.9
   form_validator: ^1.0.3
   geolocator: ^9.0.2
+  flutter_map: ^3.0.0
+  latlong2: ^0.8.1
 
 dev_dependencies:
   flutter_test:

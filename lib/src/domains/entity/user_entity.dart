@@ -1,11 +1,11 @@
-class UserModel {
+class UserEntity {
   String? email;
   String? password;
   String? confirmPassword;
   String? fullName;
   String? confirmCode;
 
-  UserModel({
+  UserEntity({
     this.email,
     this.password,
     this.fullName,
