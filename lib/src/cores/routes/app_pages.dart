@@ -37,7 +37,7 @@ class AppPages {
     ),
     GetPage(
       name: Routes.bottomNavBar,
-      page: () => BottomNavigationScreen(),
+      page: () => const BottomNavigationScreen(),
       binding: BottomNavigationBinding(),
     ),
   ];

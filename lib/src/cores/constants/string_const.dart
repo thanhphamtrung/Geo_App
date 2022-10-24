@@ -14,3 +14,8 @@ class AuthenticationConst {
   static String confirmPasswordValidationMessage =
       'Those passwords didn’t match. Try again.';
 }
+
+class BottomNavigationScreenConst {
+  static String home = 'Home';
+  static String profile = 'Profile';
+}

@@ -6,5 +6,6 @@ abstract class Routes {
   static const confirm = '/confirm';
   static const forgotPassword = '/forgotPassword';
   static const home = '/home';
+  static const profile = '/profile';
   static const bottomNavBar = '/bottomNavBar';
 }

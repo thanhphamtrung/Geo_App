@@ -1,12 +1,37 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class BottomNavigationController extends GetxController {
-  RxInt selectedIndex = 0.obs;
+import '../../bindings/home/home_bindings.dart';
+import '../../cores/routes/app_pages.dart';
+import '../../screens/home/home_screen.dart';
+import '../../screens/profile/profile_screen.dart';
 
-  void onItemTapped(int index) {
-    selectedIndex.update((val) {
-      selectedIndex = index.obs;
-    });
+class BottomNavigationController extends GetxController {
+  var currentIndex = 0.obs;
+
+  final pages = <String>[Routes.home, Routes.profile];
+
+  void changePage(int index) {
+    currentIndex.value = index;
+    Get.toNamed(pages[index], id: 1);
+  }
+
+  Route? onGenerateRoute(RouteSettings settings) {
+    if (settings.name == Routes.home) {
+      return GetPageRoute(
+        settings: settings,
+        page: () => const HomeScreen(),
+        binding: HomeBinding(),
+      );
+    }
+
+    if (settings.name == Routes.profile) {
+      return GetPageRoute(
+        settings: settings,
+        page: () => const ProfileScreen(),
+        // binding: ProfileBinding(),
+      );
+    }
+    return null;
   }
 }
