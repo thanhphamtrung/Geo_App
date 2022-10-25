@@ -8,23 +8,27 @@ import 'package:latlong2/latlong.dart';
 
 import '../../cores/helpers/permission_helper.dart';
 import '../../domains/adapters/map_repo_adapter.dart';
+import '../../domains/entity/location_entity.dart';
 
 class HomeController extends GetxController {
   final IMapRepository repository;
 
   HomeController({required this.repository});
 
-  RxDouble position = 0.0.obs;
-
-  late Rx<LatLng> yourLocation;
-  late Rx<LatLng> customerLocation;
   var listPolygon = <Polygon>[].obs;
+
+  Rx<MapEntity> map = MapEntity().obs;
 
   @override
   void onInit() async {
-    yourLocation = LatLng(-37.885371, 145.07845).obs;
-    customerLocation = LatLng(-37.9, 145.07845).obs;
-    listPolygon.value = await getPickUpLocation();
+    map.value = MapEntity(
+      yourLocation: LatLng(-37.885371, 145.07845),
+      customerLocation: LatLng(-37.9, 145.07845),
+      polygons: await getPickUpLocationPolygon(),
+    );
+    // yourLocation = LatLng(-37.885371, 145.07845).obs;
+    // customerLocation = LatLng(-37.9, 145.07845).obs;
+    // listPolygon.value = await getPickUpLocationPolygon();
     super.onInit();
   }
 
@@ -41,7 +45,7 @@ class HomeController extends GetxController {
     }
   }
 
-  Future<List<Polygon>> getPickUpLocation() async {
+  Future<List<Polygon>> getPickUpLocationPolygon() async {
     try {
       List<Polygon> listPolygon = [];
       GeoJson? geo = await repository.getGeoData();

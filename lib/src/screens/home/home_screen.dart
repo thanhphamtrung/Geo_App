@@ -32,7 +32,7 @@ class HomeScreen extends GetView<HomeController> {
                   -37.885371,
                   145.07845,
                 ),
-                zoom: 5,
+                zoom: 10,
               ),
               children: [
                 TileLayer(
@@ -43,24 +43,21 @@ class HomeScreen extends GetView<HomeController> {
                           'pk.eyJ1IjoidGhhbmhwaGFtOTkyMCIsImEiOiJjbDlpZTFtMG8wYWl5M3NwY2dqcDZpMTBhIn0._XLejFTBa4uNScQCjJ9Dhg',
                       'id': 'mapbox.mapbox-streets-v8'
                     }),
-                // MarkerLayer(
-                //   markers: [
-                //     Marker(
-                //       point: controller.yourLocation.value,
-                //       width: 1,
-                //       height: 1,
-                //       builder: (context) => const Icon(Icons.circle),
-                //     ),
-                //     Marker(
-                //       point: controller.customerLocation.value,
-                //       width: 1,
-                //       height: 1,
-                //       builder: (context) => const Icon(Icons.place),
-                //     ),
-                //   ],
-                // ),
-                if (controller.listPolygon.value.isNotEmpty)
-                  PolygonLayer(polygons: controller.listPolygon.value)
+                MarkerLayer(
+                  markers: [
+                    Marker(
+                      point: controller.map.value.yourLocation!,
+                      builder: (context) => const Icon(Icons.circle),
+                    ),
+                    Marker(
+                      point: controller.map.value.customerLocation!,
+                      builder: (context) => const Icon(Icons.place),
+                    ),
+                  ],
+                ),
+                if (controller.map.value.polygons != null &&
+                    controller.map.value.polygons!.isNotEmpty)
+                  PolygonLayer(polygons: controller.map.value.polygons!)
               ],
             ),
           ),
