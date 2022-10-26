@@ -12,8 +12,16 @@ class ProfileScreen extends GetView<MapAppController> {
   @override
   Widget build(BuildContext context) {
     return Material(
-      child: SafeArea(
-        child: Padding(
+      child: Scaffold(
+        appBar: AppBar(
+          actions: [
+            TextButton(
+              onPressed: () {},
+              child: const Text('Log Out'),
+            )
+          ],
+        ),
+        body: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 24),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.end,

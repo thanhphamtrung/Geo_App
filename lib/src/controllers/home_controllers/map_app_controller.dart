@@ -119,7 +119,10 @@ class MapAppController extends GetxController {
           }
 
           polyLines.add(Polyline(
-              points: listLatLng, color: Colors.red, borderStrokeWidth: 10));
+              points: listLatLng,
+              color: Colors.orange.shade300,
+              borderStrokeWidth: 3,
+              borderColor: Colors.orange));
         }
       }
       return polyLines;

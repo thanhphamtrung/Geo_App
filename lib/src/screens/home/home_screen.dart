@@ -61,8 +61,8 @@ class HomeScreen extends GetView<MapAppController> {
               mapController: MapController(),
               options: MapOptions(
                 center: LatLng(
-                  -37.887305,
-                  145.07845,
+                  controller.map.value.yourLocation!.latitude,
+                  controller.map.value.yourLocation!.longitude,
                 ),
                 zoom: 10,
               ),
@@ -79,11 +79,17 @@ class HomeScreen extends GetView<MapAppController> {
                   markers: [
                     Marker(
                       point: controller.map.value.yourLocation!,
-                      builder: (context) => const Icon(Icons.circle),
+                      builder: (context) => const Icon(
+                        Icons.circle_outlined,
+                        color: Colors.black,
+                      ),
                     ),
                     Marker(
                       point: controller.map.value.customerLocation!,
-                      builder: (context) => const Icon(Icons.place),
+                      builder: (context) => const Icon(
+                        Icons.place,
+                        color: Colors.red,
+                      ),
                     ),
                   ],
                 ),
