@@ -61,8 +61,8 @@ class HomeScreen extends GetView<MapAppController> {
               mapController: MapController(),
               options: MapOptions(
                 center: LatLng(
-                  controller.map.value.yourLocation!.latitude,
-                  controller.map.value.yourLocation!.longitude,
+                  controller.map.value.customerLocation!.latitude,
+                  controller.map.value.customerLocation!.longitude,
                 ),
                 zoom: 10,
               ),
