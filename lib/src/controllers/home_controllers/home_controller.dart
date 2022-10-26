@@ -25,10 +25,11 @@ class HomeController extends GetxController {
       yourLocation: LatLng(-37.885371, 145.07845),
       customerLocation: LatLng(-37.9, 145.07845),
       polygons: await getPickUpLocationPolygon(),
+      polyLines: await getDirectionRoutePolyLine(
+          yourLocation: LatLng(-37.885371, 145.07845),
+          customerLocation: LatLng(-37.9, 145.07845)),
     );
-    // yourLocation = LatLng(-37.885371, 145.07845).obs;
-    // customerLocation = LatLng(-37.9, 145.07845).obs;
-    // listPolygon.value = await getPickUpLocationPolygon();
+
     super.onInit();
   }
 
@@ -58,8 +59,7 @@ class HomeController extends GetxController {
             }
           }
 
-          listPolygon.add(
-              Polygon(points: listLatLng, color: Colors.red, isFilled: true));
+          listPolygon.add(Polygon(points: listLatLng, color: Colors.red));
         }
       }
       return listPolygon;
@@ -67,5 +67,33 @@ class HomeController extends GetxController {
       safePrint(e);
       return listPolygon;
     }
+  }
+
+  Future<List<Polyline>> getDirectionRoutePolyLine(
+      {required LatLng yourLocation, required LatLng customerLocation}) async {
+    List<Polyline> polyLines = [];
+    try {
+      GeoJson? geo = await repository.getDirectionRoutes(
+          yourLocation: yourLocation, customerLocation: customerLocation);
+      if (geo != null) {
+        for (var polyLine in geo.lines) {
+          List<LatLng> listLatLng = [];
+          for (var point in polyLine.geoSerie!.geoPoints) {
+            listLatLng.add(point.toLatLng() as LatLng);
+          }
+
+          polyLines.add(Polyline(
+              points: listLatLng, color: Colors.red, borderStrokeWidth: 10));
+        }
+      }
+      return polyLines;
+    } catch (e) {
+      safePrint(e);
+      return polyLines;
+    }
+  }
+
+  Future<bool> saveCustomerLocation() async {
+    return await repository.saveCustomerLocation(map.value.customerLocation!);
   }
 }

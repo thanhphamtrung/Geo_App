@@ -1,8 +1,10 @@
 import 'package:amplify_auth_cognito/amplify_auth_cognito.dart';
+import 'package:amplify_datastore/amplify_datastore.dart';
 import 'package:amplify_flutter/amplify_flutter.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../models/ModelProvider.dart';
 import 'app_configs/amplifyconfiguration.dart';
 import 'cores/routes/app_pages.dart';
 import 'cores/themes/app_themes.dart';
@@ -41,6 +43,9 @@ Future<void> _configureAmplify() async {
   // Add any Amplify plugins you want to use
   final authPlugin = AmplifyAuthCognito();
   await Amplify.addPlugin(authPlugin);
+  final datastorePlugin =
+      AmplifyDataStore(modelProvider: ModelProvider.instance);
+  await Amplify.addPlugin(datastorePlugin);
 
   // You can use addPlugins if you are going to be adding multiple plugins
   // await Amplify.addPlugins([authPlugin, analyticsPlugin]);

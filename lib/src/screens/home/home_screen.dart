@@ -4,7 +4,7 @@ import 'package:flutter_map/flutter_map.dart';
 import 'package:get/get.dart';
 import 'package:latlong2/latlong.dart';
 
-import '../../controllers/home_controllers/home_controllers.dart';
+import '../../controllers/home_controllers/home_controller.dart';
 
 class HomeScreen extends GetView<HomeController> {
   final LatLng? yourLocation;
@@ -29,7 +29,7 @@ class HomeScreen extends GetView<HomeController> {
               mapController: MapController(),
               options: MapOptions(
                 center: LatLng(
-                  -37.885371,
+                  -37.887305,
                   145.07845,
                 ),
                 zoom: 10,
@@ -57,7 +57,11 @@ class HomeScreen extends GetView<HomeController> {
                 ),
                 if (controller.map.value.polygons != null &&
                     controller.map.value.polygons!.isNotEmpty)
-                  PolygonLayer(polygons: controller.map.value.polygons!)
+                  PolygonLayer(polygons: controller.map.value.polygons!),
+                if (controller.map.value.polyLines != null &&
+                    controller.map.value.polyLines!.isNotEmpty)
+                  PolylineLayer(polylines: controller.map.value.polyLines!)
+                // PolylineLayer(polylines: [Polyline(points: points)],)
               ],
             ),
           ),

@@ -24,7 +24,7 @@ class BottomNavigationScreen extends GetView<BottomNavigationController> {
               label: BottomNavigationScreenConst.home,
             ),
             BottomNavigationBarItem(
-              icon: const Icon(Icons.business),
+              icon: const Icon(Icons.person),
               label: BottomNavigationScreenConst.profile,
             )
           ],

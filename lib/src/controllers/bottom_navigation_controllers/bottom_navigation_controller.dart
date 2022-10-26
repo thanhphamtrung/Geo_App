@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../bindings/home/home_bindings.dart';
+import '../../bindings/profile/profile_bindings.dart';
 import '../../cores/routes/app_pages.dart';
 import '../../screens/home/home_screen.dart';
 import '../../screens/profile/profile_screen.dart';
@@ -29,7 +30,7 @@ class BottomNavigationController extends GetxController {
       return GetPageRoute(
         settings: settings,
         page: () => const ProfileScreen(),
-        // binding: ProfileBinding(),
+        binding: ProfileBinding(),
       );
     }
     return null;

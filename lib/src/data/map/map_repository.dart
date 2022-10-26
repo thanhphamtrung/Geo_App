@@ -1,5 +1,6 @@
 import 'package:amplify_flutter/amplify_flutter.dart';
 import 'package:geojson/geojson.dart';
+import 'package:latlong2/latlong.dart';
 import 'dart:convert';
 
 import '../../domains/adapters/map_repo_adapter.dart';
@@ -18,6 +19,30 @@ class MapRepository implements IMapRepository {
 
       await geo.parse(jsonEncode(pickupLocationModel
           ?.listPickupLocationModel?.first.geoHubTileDistance));
+      return geo;
+    } catch (e) {
+      safePrint(e);
+      return null;
+    }
+  }
+
+  @override
+  Future<bool> saveCustomerLocation(LatLng latLng) async {
+    try {
+      return await provider.saveLocation(latLng);
+    } catch (e) {
+      return false;
+    }
+  }
+
+  @override
+  Future<GeoJson?> getDirectionRoutes(
+      {required LatLng yourLocation, required LatLng customerLocation}) async {
+    final geo = GeoJson();
+    try {
+      var data = await provider.getDirectionRouteData(
+          yourLocation: yourLocation, customerLocation: customerLocation);
+      await geo.parse(data!);
       return geo;
     } catch (e) {
       safePrint(e);
