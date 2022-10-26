@@ -49,4 +49,39 @@ class MapProvider implements IMapProvider {
       return null;
     }
   }
+
+  @override
+  Future<bool> updateLocation(String id, LatLng latLng) async {
+    try {
+      final userLocationWithId = await Amplify.DataStore.query(
+        UserLocation.classType,
+        where: UserLocation.ID.eq(id),
+      );
+
+      final oldLocation = userLocationWithId.first;
+      final newPost = oldLocation.copyWith(
+          id: oldLocation.id,
+          longitude: latLng.longitude,
+          latitude: latLng.latitude);
+
+      await Amplify.DataStore.save(newPost);
+      return true;
+    } catch (e) {
+      print(e);
+      return false;
+    }
+  }
+
+  @override
+  Future<bool> readLocationsFromDatabase() async {
+    try {
+      final userlocation =
+          await Amplify.DataStore.query(UserLocation.classType);
+      print('Posts: ${userlocation.reversed}');
+      return true;
+    } on DataStoreException catch (e) {
+      print('Query failed: $e');
+      return false;
+    }
+  }
 }

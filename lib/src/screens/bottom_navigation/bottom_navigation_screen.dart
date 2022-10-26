@@ -13,7 +13,7 @@ class BottomNavigationScreen extends GetView<BottomNavigationController> {
     return Scaffold(
       body: Navigator(
         key: Get.nestedKey(1),
-        initialRoute: Routes.home,
+        initialRoute: Routes.profile,
         onGenerateRoute: controller.onGenerateRoute,
       ),
       bottomNavigationBar: Obx(

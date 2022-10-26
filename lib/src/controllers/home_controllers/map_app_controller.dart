@@ -7,13 +7,13 @@ import 'package:get/get.dart';
 import 'package:latlong2/latlong.dart';
 
 import '../../cores/helpers/permission_helper.dart';
-import '../../domains/adapters/map_repo_adapter.dart';
+import '../../domains/adapters/map/map_repo_adapter.dart';
 import '../../domains/entity/location_entity.dart';
 
-class HomeController extends GetxController {
+class MapAppController extends GetxController {
   final IMapRepository repository;
 
-  HomeController({required this.repository});
+  MapAppController({required this.repository});
 
   var listPolygon = <Polygon>[].obs;
 
@@ -38,11 +38,47 @@ class HomeController extends GetxController {
     if (!hasPermission) return null;
     try {
       var position = await Geolocator.getCurrentPosition(
-          desiredAccuracy: LocationAccuracy.high);
+          desiredAccuracy: LocationAccuracy.bestForNavigation);
       return position;
     } catch (e) {
       safePrint(e);
       return null;
+    }
+  }
+
+  Future<bool> saveCustomerLocation() async {
+    try {
+      return await repository.saveCustomerLocation(map.value.customerLocation!);
+    } catch (e) {
+      return false;
+    }
+  }
+
+  Future<bool> saveCustomerCurrentLocation() async {
+    try {
+      var currentLocation = await getCurrentPosition();
+      map.value.customerLocation?.latitude = currentLocation!.latitude;
+      map.value.customerLocation?.longitude = currentLocation!.longitude;
+      return await repository.saveCustomerLocation(map.value.customerLocation!);
+    } catch (e) {
+      return false;
+    }
+  }
+
+  Future<bool> updateCustomerLocation() async {
+    try {
+      return await repository.updateCustomerLocation(
+          '1', map.value.customerLocation!);
+    } catch (e) {
+      return false;
+    }
+  }
+
+  Future<bool> readCustomerLocations() async {
+    try {
+      return await repository.readCustomerLocations();
+    } catch (e) {
+      return false;
     }
   }
 
@@ -93,7 +129,9 @@ class HomeController extends GetxController {
     }
   }
 
-  Future<bool> saveCustomerLocation() async {
-    return await repository.saveCustomerLocation(map.value.customerLocation!);
+  Future updateDirectionRoute(
+      {required LatLng yourLocation, required LatLng customerLocation}) async {
+    map.value.polyLines = await getDirectionRoutePolyLine(
+        customerLocation: customerLocation, yourLocation: yourLocation);
   }
 }

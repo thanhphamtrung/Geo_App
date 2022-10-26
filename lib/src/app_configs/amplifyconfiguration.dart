@@ -1,6 +1,19 @@
 const amplifyconfig = ''' {
     "UserAgent": "aws-amplify-cli/2.0",
     "Version": "1.0",
+    "api": {
+        "plugins": {
+            "awsAPIPlugin": {
+                "geoapp": {
+                    "endpointType": "GraphQL",
+                    "endpoint": "https://a72ao25x4rhufbmmwozktzvodm.appsync-api.us-east-1.amazonaws.com/graphql",
+                    "region": "us-east-1",
+                    "authorizationType": "API_KEY",
+                    "apiKey": "da2-6zbnsycglve2zfo34lh7gcp26q"
+                }
+            }
+        }
+    },
     "auth": {
         "plugins": {
             "awsCognitoAuthPlugin": {
@@ -43,6 +56,15 @@ const amplifyconfig = ''' {
                         "verificationMechanisms": [
                             "EMAIL"
                         ]
+                    }
+                },
+                "AppSync": {
+                    "Default": {
+                        "ApiUrl": "https://a72ao25x4rhufbmmwozktzvodm.appsync-api.us-east-1.amazonaws.com/graphql",
+                        "Region": "us-east-1",
+                        "AuthMode": "API_KEY",
+                        "ApiKey": "da2-6zbnsycglve2zfo34lh7gcp26q",
+                        "ClientDatabasePrefix": "geoapp_API_KEY"
                     }
                 }
             }

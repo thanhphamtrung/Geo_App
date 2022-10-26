@@ -3,8 +3,8 @@ import 'package:geojson/geojson.dart';
 import 'package:latlong2/latlong.dart';
 import 'dart:convert';
 
-import '../../domains/adapters/map_repo_adapter.dart';
-import 'provider/i_map_provider.dart';
+import 'map_repo_adapter.dart';
+import '../../../data/map/provider/i_map_provider.dart';
 
 class MapRepository implements IMapRepository {
   final IMapProvider provider;
@@ -47,6 +47,30 @@ class MapRepository implements IMapRepository {
     } catch (e) {
       safePrint(e);
       return null;
+    }
+  }
+
+  @override
+  Future<bool> updateCustomerLocation(String id, LatLng latLng) async {
+    late bool result;
+    try {
+      result = await provider.updateLocation(id, latLng);
+      return result;
+    } catch (e) {
+      print(e);
+      return result;
+    }
+  }
+
+  @override
+  Future<bool> readCustomerLocations() async {
+    late bool result;
+    try {
+      result = await provider.readLocationsFromDatabase();
+      return result;
+    } catch (e) {
+      print(e);
+      return result;
     }
   }
 }

@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../../controllers/profile_controllers/profile_controller.dart';
-import '../../cores/constants/app_assets.dart';
+import '../../controllers/home_controllers/map_app_controller.dart';
+import '../../cores/routes/app_pages.dart';
 import '../../widgets/app_text_field.dart';
 import '../../widgets/rounded_button.dart';
 
-class ProfileScreen extends GetView<ProfileController> {
+class ProfileScreen extends GetView<MapAppController> {
   const ProfileScreen({super.key});
 
   @override
@@ -19,19 +19,26 @@ class ProfileScreen extends GetView<ProfileController> {
             mainAxisAlignment: MainAxisAlignment.end,
             crossAxisAlignment: CrossAxisAlignment.end,
             children: [
-              Expanded(
-                child: Center(
-                  child: SizedBox(
-                      height: 187,
-                      width: 180,
-                      child: Image.asset(ImageAssetsPath.logo)),
+              const SizedBox(height: 46),
+              Center(
+                child: RoundedButton(
+                  onPressed: () async {
+                    controller.updateDirectionRoute(
+                        customerLocation:
+                            controller.map.value.customerLocation!,
+                        yourLocation: controller.map.value.yourLocation!);
+                    Get.toNamed(Routes.home);
+                  },
+                  child: const Text('Draw Destination'),
                 ),
               ),
+              const SizedBox(height: 32),
               AppTextField(
                 hintText: 'Enter Lat',
                 onChanged: (value) {
-                  controller.lat.update((lat) {
-                    lat = double.tryParse(value ?? '');
+                  controller.map.update((map) {
+                    map?.customerLocation?.latitude =
+                        double.tryParse(value ?? '') ?? 0;
                   });
                 },
               ),
@@ -39,8 +46,9 @@ class ProfileScreen extends GetView<ProfileController> {
               AppTextField(
                 hintText: 'Enter Long',
                 onChanged: (value) {
-                  controller.long.update((long) {
-                    long = double.tryParse(value ?? '');
+                  controller.map.update((map) {
+                    map?.customerLocation?.longitude =
+                        double.tryParse(value ?? '') ?? 0;
                   });
                 },
               ),
@@ -54,6 +62,36 @@ class ProfileScreen extends GetView<ProfileController> {
                   child: const Text('Save Location'),
                 ),
               ),
+              const SizedBox(height: 32),
+              Center(
+                child: RoundedButton(
+                  onPressed: () async {
+                    controller.saveCustomerCurrentLocation();
+                  },
+                  isLarge: true,
+                  child: const Text('Save Current Location'),
+                ),
+              ),
+              // const SizedBox(height: 32),
+              // Center(
+              //   child: RoundedButton(
+              //     onPressed: () async {
+              //       controller.readCustomerLocations();
+              //     },
+              //     isLarge: true,
+              //     child: const Text('Read Location'),
+              //   ),
+              // ),
+              // const SizedBox(height: 32),
+              // Center(
+              //   child: RoundedButton(
+              //     onPressed: () async {
+              //       controller.readCustomerLocations();
+              //     },
+              //     isLarge: true,
+              //     child: const Text('Read Location'),
+              //   ),
+              // ),
               const SizedBox(height: 46),
             ],
           ),

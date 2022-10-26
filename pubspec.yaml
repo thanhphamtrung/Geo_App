@@ -40,6 +40,7 @@ dependencies:
   amplify_flutter: ^0.6.9
   amplify_auth_cognito: ^0.6.9
   amplify_datastore: ^0.6.9
+  amplify_api: ^0.6.9
   form_validator: ^1.0.3
   geolocator: ^9.0.2
   flutter_map: ^3.0.0

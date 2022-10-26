@@ -4,9 +4,9 @@ import 'package:flutter_map/flutter_map.dart';
 import 'package:get/get.dart';
 import 'package:latlong2/latlong.dart';
 
-import '../../controllers/home_controllers/home_controller.dart';
+import '../../controllers/home_controllers/map_app_controller.dart';
 
-class HomeScreen extends GetView<HomeController> {
+class HomeScreen extends GetView<MapAppController> {
   final LatLng? yourLocation;
   final LatLng? customerLocation;
   const HomeScreen({
@@ -19,8 +19,14 @@ class HomeScreen extends GetView<HomeController> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: const Color.fromARGB(255, 33, 32, 32),
         title: const Text('Flutter MapBox'),
+        actions: [
+          IconButton(
+              onPressed: () {
+                // controller
+              },
+              icon: const Icon(Icons.info)),
+        ],
       ),
       body: Stack(
         children: [
@@ -61,7 +67,6 @@ class HomeScreen extends GetView<HomeController> {
                 if (controller.map.value.polyLines != null &&
                     controller.map.value.polyLines!.isNotEmpty)
                   PolylineLayer(polylines: controller.map.value.polyLines!)
-                // PolylineLayer(polylines: [Polyline(points: points)],)
               ],
             ),
           ),

@@ -6,12 +6,15 @@
     "gqlSchemaPath": "/Users/thanhpham/Documents/workplace/gimme_now/geo_app/amplify/backend/api/geoapp/schema.graphql",
     "defaultAuthType": {
       "mode": "API_KEY",
-      "expirationTime": 7
+      "expirationTime": 7,
+      "apiKeyExpirationDate": "2022-11-02T03:21:09.979Z",
+      "keyDescription": "UserLocationKey"
     },
     "conflictResolution": {
       "defaultResolutionStrategy": {
         "type": "AUTOMERGE"
       }
-    }
+    },
+    "additionalAuthTypes": []
   }
 }

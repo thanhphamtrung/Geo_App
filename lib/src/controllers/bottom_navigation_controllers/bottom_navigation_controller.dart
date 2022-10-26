@@ -8,7 +8,7 @@ import '../../screens/home/home_screen.dart';
 import '../../screens/profile/profile_screen.dart';
 
 class BottomNavigationController extends GetxController {
-  var currentIndex = 0.obs;
+  var currentIndex = 1.obs;
 
   final pages = <String>[Routes.home, Routes.profile];
 

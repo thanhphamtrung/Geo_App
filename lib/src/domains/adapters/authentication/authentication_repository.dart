@@ -1,11 +1,11 @@
 import 'package:amplify_flutter/amplify_flutter.dart';
 
-import '../../domains/adapters/authentication_repo_adapter.dart';
-import '../../domains/entity/user_entity.dart';
-import '../models/confirm_sign_up_model.dart';
-import '../models/login_model.dart';
-import '../models/sign_up_model.dart';
-import 'provider/i_authentication_provider.dart';
+import 'authentication_repo_adapter.dart';
+import '../../entity/user_entity.dart';
+import '../../../data/models/confirm_sign_up_model.dart';
+import '../../../data/models/login_model.dart';
+import '../../../data/models/sign_up_model.dart';
+import '../../../data/authentication/provider/i_authentication_provider.dart';
 
 class AuthenticationRepository implements IAuthenticationRepository {
   final IAuthenticationProvider provider;

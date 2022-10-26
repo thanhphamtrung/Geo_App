@@ -37,25 +37,23 @@ class _GeoAppState extends State<GeoApp> {
       // translations: TranslationService(),
     );
   }
-}
 
-Future<void> _configureAmplify() async {
-  // Add any Amplify plugins you want to use
-  final authPlugin = AmplifyAuthCognito();
-  await Amplify.addPlugin(authPlugin);
-  final datastorePlugin =
-      AmplifyDataStore(modelProvider: ModelProvider.instance);
-  await Amplify.addPlugin(datastorePlugin);
+  Future<void> _configureAmplify() async {
+    // Add any Amplify plugins you want to use
+    final authPlugin = AmplifyAuthCognito();
+    final datastorePlugin =
+        AmplifyDataStore(modelProvider: ModelProvider.instance);
 
-  // You can use addPlugins if you are going to be adding multiple plugins
-  // await Amplify.addPlugins([authPlugin, analyticsPlugin]);
+    // You can use addPlugins if you are going to be adding multiple plugins
+    await Amplify.addPlugins([authPlugin, datastorePlugin]);
 
-  // Once Plugins are added, configure Amplify
-  // Note: Amplify can only be configured once.
-  try {
-    await Amplify.configure(amplifyconfig);
-  } on AmplifyAlreadyConfiguredException {
-    safePrint(
-        "Tried to reconfigure Amplify; this can occur when your app restarts on Android.");
+    // Once Plugins are added, configure Amplify
+    // Note: Amplify can only be configured once.
+    try {
+      await Amplify.configure(amplifyconfig);
+    } on AmplifyAlreadyConfiguredException {
+      safePrint(
+          "Tried to reconfigure Amplify; this can occur when your app restarts on Android.");
+    }
   }
 }

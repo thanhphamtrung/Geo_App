@@ -1,6 +1,6 @@
 import 'package:get/get.dart';
 
-import '../../domains/adapters/authentication_repo_adapter.dart';
+import '../../domains/adapters/authentication/authentication_repo_adapter.dart';
 import '../../domains/entity/user_entity.dart';
 
 class RegisterController extends GetxController {

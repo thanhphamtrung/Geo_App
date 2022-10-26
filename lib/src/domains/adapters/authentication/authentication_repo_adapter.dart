@@ -1,4 +1,4 @@
-import '../entity/user_entity.dart';
+import '../../entity/user_entity.dart';
 
 abstract class IAuthenticationRepository {
   Future<bool> userSignUpByEmail(UserEntity user);
