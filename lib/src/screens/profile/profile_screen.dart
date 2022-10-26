@@ -23,10 +23,11 @@ class ProfileScreen extends GetView<MapAppController> {
               Center(
                 child: RoundedButton(
                   onPressed: () async {
-                    controller.updateDirectionRoute(
+                    await controller.updateDirectionRoute(
                         customerLocation:
                             controller.map.value.customerLocation!,
                         yourLocation: controller.map.value.yourLocation!);
+                    controller.checkIfInsidePickupLocation();
                     Get.toNamed(Routes.home);
                   },
                   child: const Text('Draw Destination'),

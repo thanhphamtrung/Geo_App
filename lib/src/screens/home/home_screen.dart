@@ -21,9 +21,35 @@ class HomeScreen extends GetView<MapAppController> {
       appBar: AppBar(
         title: const Text('Flutter MapBox'),
         actions: [
+          Obx(() {
+            if (controller.isInsidePickUpLocation.value) {
+              return ElevatedButton(
+                onPressed: () {},
+                child: const Text('Pickup Order'),
+              );
+            }
+            return const SizedBox.shrink();
+          }),
           IconButton(
-              onPressed: () {
-                // controller
+              onPressed: () async {
+                await controller.getEtaDistance();
+                showDialog(
+                    context: context,
+                    builder: (_) => AlertDialog(
+                          title: const Text('User Location Information'),
+                          content: Obx(() => SizedBox(
+                                height: 120,
+                                child: (Column(
+                                  children: [
+                                    Text(
+                                        'Estimated Time Arrival: ${controller.map.value.eta.toString()}'),
+                                    const SizedBox(height: 16),
+                                    Text(
+                                        'Distance: ${controller.map.value.distance.toString()}'),
+                                  ],
+                                )),
+                              )),
+                        ));
               },
               icon: const Icon(Icons.info)),
         ],

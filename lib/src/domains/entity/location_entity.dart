@@ -6,11 +6,15 @@ class MapEntity {
   LatLng? customerLocation;
   List<Polygon>? polygons;
   List<Polyline>? polyLines;
+  double? eta;
+  double? distance;
 
   MapEntity({
     this.yourLocation,
     this.customerLocation,
     this.polygons,
     this.polyLines,
+    this.eta,
+    this.distance,
   });
 }

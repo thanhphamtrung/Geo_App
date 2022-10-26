@@ -42,11 +42,32 @@ class MapRepository implements IMapRepository {
     try {
       var data = await provider.getDirectionRouteData(
           yourLocation: yourLocation, customerLocation: customerLocation);
-      await geo.parse(data!);
+      var dataToParsed = data!['routes'][0];
+      Map<String, dynamic> dataInput = {};
+      dataInput['features'] = [dataToParsed];
+      await geo.parse(json.encode(dataInput));
       return geo;
     } catch (e) {
       safePrint(e);
       return null;
+    }
+  }
+
+  @override
+  Future<List<double>> getEtaDistance(
+      {required LatLng yourLocation, required LatLng customerLocation}) async {
+    try {
+      var data = await provider.getDirectionRouteData(
+          yourLocation: yourLocation, customerLocation: customerLocation);
+      print(jsonEncode(data));
+      var routes = data!['routes'][0];
+      var eta = routes['duration'];
+      var distance = routes['distance'];
+
+      return [eta, distance];
+    } catch (e) {
+      safePrint(e);
+      return [];
     }
   }
 
