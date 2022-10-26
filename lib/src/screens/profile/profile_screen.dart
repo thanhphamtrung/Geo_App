@@ -3,7 +3,6 @@ import 'package:get/get.dart';
 
 import '../../controllers/home_controllers/map_app_controller.dart';
 import '../../cores/routes/app_pages.dart';
-import '../../widgets/app_text_field.dart';
 import '../../widgets/rounded_button.dart';
 
 class ProfileScreen extends GetView<MapAppController> {
@@ -43,36 +42,6 @@ class ProfileScreen extends GetView<MapAppController> {
                     Get.toNamed(Routes.home);
                   },
                   child: const Text('Draw Destination'),
-                ),
-              ),
-              const SizedBox(height: 32),
-              AppTextField(
-                hintText: 'Enter Lat',
-                onChanged: (value) {
-                  controller.map.update((map) {
-                    map?.customerLocation?.latitude =
-                        double.tryParse(value ?? '') ?? 0;
-                  });
-                },
-              ),
-              const SizedBox(height: 16),
-              AppTextField(
-                hintText: 'Enter Long',
-                onChanged: (value) {
-                  controller.map.update((map) {
-                    map?.customerLocation?.longitude =
-                        double.tryParse(value ?? '') ?? 0;
-                  });
-                },
-              ),
-              const SizedBox(height: 16),
-              Center(
-                child: RoundedButton(
-                  onPressed: () async {
-                    controller.saveCustomerLocation();
-                  },
-                  isLarge: true,
-                  child: const Text('Save Location'),
                 ),
               ),
               const SizedBox(height: 32),
