@@ -78,4 +78,18 @@ class AuthenticationRepository implements IAuthenticationRepository {
       return false;
     }
   }
+
+  @override
+  Future<bool> userSignOut() async {
+    try {
+      var result = await provider.signOut();
+      if (result != null) {
+        return true;
+      }
+      return false;
+    } catch (e) {
+      safePrint(e);
+      return false;
+    }
+  }
 }

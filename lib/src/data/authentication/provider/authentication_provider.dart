@@ -58,4 +58,13 @@ class AuthenticationProvider implements IAuthenticationProvider {
       return null;
     }
   }
+
+  @override
+  Future<SignOutResult?> signOut() async {
+    try {
+      return await Amplify.Auth.signOut();
+    } catch (e) {
+      return null;
+    }
+  }
 }

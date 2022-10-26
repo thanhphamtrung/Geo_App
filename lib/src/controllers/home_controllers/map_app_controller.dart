@@ -7,13 +7,18 @@ import 'package:get/get.dart';
 import 'package:latlong2/latlong.dart';
 
 import '../../cores/helpers/permission_helper.dart';
+import '../../domains/adapters/authentication/authentication_repo_adapter.dart';
 import '../../domains/adapters/map/map_repo_adapter.dart';
 import '../../domains/entity/location_entity.dart';
 
 class MapAppController extends GetxController {
   final IMapRepository repository;
+  final IAuthenticationRepository authenticationRepository;
 
-  MapAppController({required this.repository});
+  MapAppController({
+    required this.repository,
+    required this.authenticationRepository,
+  });
 
   var isInsidePickUpLocation = false.obs;
 
@@ -31,6 +36,10 @@ class MapAppController extends GetxController {
     );
 
     super.onInit();
+  }
+
+  Future<bool> signOut() async {
+    return await authenticationRepository.userSignOut();
   }
 
   Future<Position?> getCurrentPosition() async {

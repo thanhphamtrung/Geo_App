@@ -18,4 +18,6 @@ abstract class IAuthenticationProvider {
     required String email,
     required String confirmCode,
   });
+
+  Future<SignOutResult?> signOut();
 }

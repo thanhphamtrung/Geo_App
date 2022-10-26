@@ -66,7 +66,7 @@ class LoginScreen extends GetView<LoginController> {
                 child: RoundedButton(
                   onPressed: () async {
                     if (await controller.signIn()) {
-                      Get.toNamed(Routes.home);
+                      Get.toNamed(Routes.profile);
                     }
                   },
                   isLarge: true,

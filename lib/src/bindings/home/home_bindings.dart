@@ -11,6 +11,7 @@ class HomeBinding extends Bindings {
   void dependencies() {
     Get.lazyPut<IMapProvider>(() => MapProvider());
     Get.lazyPut<IMapRepository>(() => MapRepository(provider: Get.find()));
-    Get.lazyPut(() => MapAppController(repository: Get.find()));
+    Get.lazyPut(() => MapAppController(
+        repository: Get.find(), authenticationRepository: Get.find()));
   }
 }

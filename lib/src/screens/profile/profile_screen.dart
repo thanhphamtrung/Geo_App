@@ -14,9 +14,13 @@ class ProfileScreen extends GetView<MapAppController> {
     return Material(
       child: Scaffold(
         appBar: AppBar(
+          automaticallyImplyLeading: false,
           actions: [
             TextButton(
-              onPressed: () {},
+              onPressed: () async {
+                await controller.signOut();
+                Get.toNamed(Routes.login);
+              },
               child: const Text('Log Out'),
             )
           ],
@@ -81,26 +85,6 @@ class ProfileScreen extends GetView<MapAppController> {
                   child: const Text('Save Current Location'),
                 ),
               ),
-              // const SizedBox(height: 32),
-              // Center(
-              //   child: RoundedButton(
-              //     onPressed: () async {
-              //       controller.readCustomerLocations();
-              //     },
-              //     isLarge: true,
-              //     child: const Text('Read Location'),
-              //   ),
-              // ),
-              // const SizedBox(height: 32),
-              // Center(
-              //   child: RoundedButton(
-              //     onPressed: () async {
-              //       controller.readCustomerLocations();
-              //     },
-              //     isLarge: true,
-              //     child: const Text('Read Location'),
-              //   ),
-              // ),
               const SizedBox(height: 46),
             ],
           ),
