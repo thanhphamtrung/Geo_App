@@ -65,8 +65,15 @@ class LoginScreen extends GetView<LoginController> {
               Center(
                 child: RoundedButton(
                   onPressed: () async {
+                    Get.snackbar(
+                        HomeConst.appName, AuthenticationConst.loggingInMessage,
+                        colorText: Colors.black);
                     if (await controller.signIn()) {
                       Get.toNamed(Routes.profile);
+                    } else {
+                      Get.snackbar(
+                          HomeConst.appName, AuthenticationConst.failMessage,
+                          colorText: Colors.black);
                     }
                   },
                   isLarge: true,

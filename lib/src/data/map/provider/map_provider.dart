@@ -5,6 +5,7 @@ import 'package:latlong2/latlong.dart';
 import 'dart:convert';
 
 import '../../../../models/ModelProvider.dart';
+import '../../../app_configs/api_configs.dart';
 import '../../models/pickup_location_model.dart';
 import 'i_map_provider.dart';
 
@@ -35,14 +36,11 @@ class MapProvider implements IMapProvider {
   }
 
   @override
-  Future<Map<String,dynamic>?> getDirectionRouteData(
+  Future<Map<String, dynamic>?> getDirectionRouteData(
       {required LatLng yourLocation, required LatLng customerLocation}) async {
     try {
       var response = await Dio().get(
-          'https://api.mapbox.com/directions/v5/mapbox/driving/${yourLocation.longitude},${yourLocation.latitude};${customerLocation.longitude},${customerLocation.latitude}?alternatives=false&geometries=geojson&overview=simplified&steps=false&access_token=pk.eyJ1IjoidGhhbmhwaGFtOTkyMCIsImEiOiJjbDlpZTFtMG8wYWl5M3NwY2dqcDZpMTBhIn0._XLejFTBa4uNScQCjJ9Dhg');
-      // var dataToParsed = response.data['routes'][0];
-      // Map<String, dynamic> dataInput = {};
-      // dataInput['features'] = [dataToParsed];
+          '${ApiConfigs.mapBoxDestinationUrl}${yourLocation.longitude},${yourLocation.latitude};${customerLocation.longitude},${customerLocation.latitude}${ApiConfigs.mapBoxDestinationQueries}${ApiConfigs.mapBoxDestinationTokenKey}${ApiConfigs.mapBoxDestinationToken}');
       return response.data;
     } catch (e) {
       print(e);

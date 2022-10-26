@@ -74,8 +74,15 @@ class RegisterScreen extends GetView<RegisterController> {
                 child: RoundedButton(
                   onPressed: () async {
                     if (formKey.currentState!.validate()) {
+                      Get.snackbar(HomeConst.appName,
+                          AuthenticationConst.singingUpMessage,
+                          colorText: Colors.black);
                       if (await controller.signUp()) {
                         Get.toNamed(Routes.confirm);
+                      } else {
+                        Get.snackbar(
+                            HomeConst.appName, AuthenticationConst.failMessage,
+                            colorText: Colors.black);
                       }
                     }
                   },

@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../controllers/home_controllers/map_app_controller.dart';
+import '../../cores/constants/app_assets.dart';
+import '../../cores/constants/string_const.dart';
 import '../../cores/routes/app_pages.dart';
 import '../../widgets/rounded_button.dart';
 
@@ -20,7 +22,7 @@ class ProfileScreen extends GetView<MapAppController> {
                 await controller.signOut();
                 Get.toNamed(Routes.login);
               },
-              child: const Text('Log Out'),
+              child: Text(ProfileConst.logOut),
             )
           ],
         ),
@@ -30,7 +32,8 @@ class ProfileScreen extends GetView<MapAppController> {
             mainAxisAlignment: MainAxisAlignment.end,
             crossAxisAlignment: CrossAxisAlignment.end,
             children: [
-              const SizedBox(height: 46),
+              Expanded(child: Image.asset(ImageAssetsPath.logo)),
+              const SizedBox(height: 32),
               Center(
                 child: RoundedButton(
                   onPressed: () async {
@@ -41,7 +44,7 @@ class ProfileScreen extends GetView<MapAppController> {
                     controller.checkIfInsidePickupLocation();
                     Get.toNamed(Routes.home);
                   },
-                  child: const Text('Draw Destination'),
+                  child: Text(ProfileConst.drawDestination),
                 ),
               ),
               const SizedBox(height: 32),
@@ -51,7 +54,7 @@ class ProfileScreen extends GetView<MapAppController> {
                     controller.saveCustomerCurrentLocation();
                   },
                   isLarge: true,
-                  child: const Text('Save Current Location'),
+                  child: Text(ProfileConst.saveCurrentLocation),
                 ),
               ),
               const SizedBox(height: 46),

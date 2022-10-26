@@ -4,7 +4,9 @@ import 'package:flutter_map/flutter_map.dart';
 import 'package:get/get.dart';
 import 'package:latlong2/latlong.dart';
 
+import '../../app_configs/api_configs.dart';
 import '../../controllers/home_controllers/map_app_controller.dart';
+import '../../cores/constants/string_const.dart';
 
 class HomeScreen extends GetView<MapAppController> {
   final LatLng? yourLocation;
@@ -19,13 +21,13 @@ class HomeScreen extends GetView<MapAppController> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Flutter MapBox'),
+        title: Text(HomeConst.appName),
         actions: [
           Obx(() {
             if (controller.isInsidePickUpLocation.value) {
               return ElevatedButton(
                 onPressed: () {},
-                child: const Text('Pickup Order'),
+                child: Text(HomeConst.pickupButtonLabel),
               );
             }
             return const SizedBox.shrink();
@@ -36,16 +38,16 @@ class HomeScreen extends GetView<MapAppController> {
                 showDialog(
                     context: context,
                     builder: (_) => AlertDialog(
-                          title: const Text('User Location Information'),
+                          title: Text(HomeConst.userInfoModelTitle),
                           content: Obx(() => SizedBox(
                                 height: 120,
                                 child: (Column(
                                   children: [
                                     Text(
-                                        'Estimated Time Arrival: ${controller.map.value.eta.toString()}'),
+                                        '${HomeConst.etaDescription} ${controller.map.value.eta.toString()}'),
                                     const SizedBox(height: 16),
                                     Text(
-                                        'Distance: ${controller.map.value.distance.toString()}'),
+                                        '${HomeConst.distanceDescription} ${controller.map.value.distance.toString()}'),
                                   ],
                                 )),
                               )),
@@ -68,12 +70,10 @@ class HomeScreen extends GetView<MapAppController> {
               ),
               children: [
                 TileLayer(
-                    urlTemplate:
-                        'https://api.mapbox.com/styles/v1/thanhpham9920/cl9kz1pla006i14msdd87tqlq/tiles/256/{z}/{x}/{y}@2x?access_token=pk.eyJ1IjoidGhhbmhwaGFtOTkyMCIsImEiOiJjbDlpZTFtMG8wYWl5M3NwY2dqcDZpMTBhIn0._XLejFTBa4uNScQCjJ9Dhg',
-                    additionalOptions: const {
-                      'accessToken':
-                          'pk.eyJ1IjoidGhhbmhwaGFtOTkyMCIsImEiOiJjbDlpZTFtMG8wYWl5M3NwY2dqcDZpMTBhIn0._XLejFTBa4uNScQCjJ9Dhg',
-                      'id': 'mapbox.mapbox-streets-v8'
+                    urlTemplate: ApiConfigs.mapBoxUrlTemplate,
+                    additionalOptions: {
+                      ApiConfigs.accessTokenKey: ApiConfigs.accessToken,
+                      ApiConfigs.mapIDkey: ApiConfigs.mapID,
                     }),
                 MarkerLayer(
                   markers: [
