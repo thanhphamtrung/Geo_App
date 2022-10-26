@@ -58,7 +58,7 @@ class RegisterScreen extends GetView<RegisterController> {
                     const SizedBox(height: 16),
                     AppTextField(
                       hintText: AuthenticationConst.password,
-                      suffixIcon: const Icon(Icons.visibility_off_rounded),
+                      obscureText: true,
                       onChanged: (value) {
                         controller.user.update((user) {
                           user?.password = value;

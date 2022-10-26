@@ -43,7 +43,7 @@ class LoginScreen extends GetView<LoginController> {
               const SizedBox(height: 16),
               AppTextField(
                 hintText: AuthenticationConst.password,
-                suffixIcon: const Icon(Icons.visibility_off_rounded),
+                obscureText: true,
                 validator: RegisterValidation().getPasswordValidator(),
                 onChanged: (value) {
                   controller.user.update((user) {

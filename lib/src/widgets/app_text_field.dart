@@ -5,6 +5,7 @@ class AppTextField extends StatelessWidget {
   final Icon? suffixIcon;
   final Function(String?)? onChanged;
   final String? Function(String?)? validator;
+  final bool obscureText;
 
   const AppTextField({
     super.key,
@@ -12,6 +13,7 @@ class AppTextField extends StatelessWidget {
     this.suffixIcon,
     this.onChanged,
     this.validator,
+    this.obscureText = false,
   });
 
   @override
@@ -31,6 +33,7 @@ class AppTextField extends StatelessWidget {
       onChanged: onChanged,
       validator: validator,
       autovalidateMode: AutovalidateMode.onUserInteraction,
+      obscureText: obscureText,
     );
   }
 }
