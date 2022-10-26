@@ -1,4 +1,4 @@
-import '../../domains/entity/user_model.dart';
+import '../../domains/entity/user_entity.dart';
 
 class LoginModel {
   String email;
@@ -9,7 +9,7 @@ class LoginModel {
     required this.password,
   });
 
-  static LoginModel? convertUserModelToSignInModel(UserModel user) {
+  static LoginModel? convertUserModelToSignInModel(UserEntity user) {
     if (user.email != null && user.password != null) {
       var signUpModel = LoginModel(
         email: user.email!,

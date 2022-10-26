@@ -6,7 +6,7 @@ import '../../data/map/provider/i_map_provider.dart';
 import '../../data/map/provider/map_provider.dart';
 import '../../domains/adapters/map/map_repo_adapter.dart';
 
-class HomeBinding extends Bindings {
+class ProfileBinding extends Bindings {
   @override
   void dependencies() {
     Get.lazyPut<IMapProvider>(() => MapProvider());

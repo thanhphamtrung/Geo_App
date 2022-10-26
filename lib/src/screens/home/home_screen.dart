@@ -1,13 +1,109 @@
 import 'package:flutter/material.dart';
-import 'package:get/get_state_manager/get_state_manager.dart';
 
-class HomeScreen extends GetView {
-  const HomeScreen({super.key});
+import 'package:flutter_map/flutter_map.dart';
+import 'package:get/get.dart';
+import 'package:latlong2/latlong.dart';
+
+import '../../controllers/home_controllers/map_app_controller.dart';
+
+class HomeScreen extends GetView<MapAppController> {
+  final LatLng? yourLocation;
+  final LatLng? customerLocation;
+  const HomeScreen({
+    super.key,
+    this.yourLocation,
+    this.customerLocation,
+  });
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
-      body: Center(child: Text('this is home')),
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('Flutter MapBox'),
+        actions: [
+          Obx(() {
+            if (controller.isInsidePickUpLocation.value) {
+              return ElevatedButton(
+                onPressed: () {},
+                child: const Text('Pickup Order'),
+              );
+            }
+            return const SizedBox.shrink();
+          }),
+          IconButton(
+              onPressed: () async {
+                await controller.getEtaDistance();
+                showDialog(
+                    context: context,
+                    builder: (_) => AlertDialog(
+                          title: const Text('User Location Information'),
+                          content: Obx(() => SizedBox(
+                                height: 120,
+                                child: (Column(
+                                  children: [
+                                    Text(
+                                        'Estimated Time Arrival: ${controller.map.value.eta.toString()}'),
+                                    const SizedBox(height: 16),
+                                    Text(
+                                        'Distance: ${controller.map.value.distance.toString()}'),
+                                  ],
+                                )),
+                              )),
+                        ));
+              },
+              icon: const Icon(Icons.info)),
+        ],
+      ),
+      body: Stack(
+        children: [
+          Obx(
+            () => FlutterMap(
+              mapController: MapController(),
+              options: MapOptions(
+                center: LatLng(
+                  controller.map.value.yourLocation!.latitude,
+                  controller.map.value.yourLocation!.longitude,
+                ),
+                zoom: 10,
+              ),
+              children: [
+                TileLayer(
+                    urlTemplate:
+                        'https://api.mapbox.com/styles/v1/thanhpham9920/cl9kz1pla006i14msdd87tqlq/tiles/256/{z}/{x}/{y}@2x?access_token=pk.eyJ1IjoidGhhbmhwaGFtOTkyMCIsImEiOiJjbDlpZTFtMG8wYWl5M3NwY2dqcDZpMTBhIn0._XLejFTBa4uNScQCjJ9Dhg',
+                    additionalOptions: const {
+                      'accessToken':
+                          'pk.eyJ1IjoidGhhbmhwaGFtOTkyMCIsImEiOiJjbDlpZTFtMG8wYWl5M3NwY2dqcDZpMTBhIn0._XLejFTBa4uNScQCjJ9Dhg',
+                      'id': 'mapbox.mapbox-streets-v8'
+                    }),
+                MarkerLayer(
+                  markers: [
+                    Marker(
+                      point: controller.map.value.yourLocation!,
+                      builder: (context) => const Icon(
+                        Icons.circle_outlined,
+                        color: Colors.black,
+                      ),
+                    ),
+                    Marker(
+                      point: controller.map.value.customerLocation!,
+                      builder: (context) => const Icon(
+                        Icons.place,
+                        color: Colors.red,
+                      ),
+                    ),
+                  ],
+                ),
+                if (controller.map.value.polygons != null &&
+                    controller.map.value.polygons!.isNotEmpty)
+                  PolygonLayer(polygons: controller.map.value.polygons!),
+                if (controller.map.value.polyLines != null &&
+                    controller.map.value.polyLines!.isNotEmpty)
+                  PolylineLayer(polylines: controller.map.value.polyLines!)
+              ],
+            ),
+          ),
+        ],
+      ),
     );
   }
 }

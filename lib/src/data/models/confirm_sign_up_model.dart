@@ -1,4 +1,4 @@
-import '../../domains/entity/user_model.dart';
+import '../../domains/entity/user_entity.dart';
 
 class ConfirmSignUpModel {
   String email;
@@ -9,7 +9,7 @@ class ConfirmSignUpModel {
     required this.confirmCode,
   });
 
-  static ConfirmSignUpModel? convertUserModelToSignInModel(UserModel user) {
+  static ConfirmSignUpModel? convertUserModelToSignInModel(UserEntity user) {
     if (user.email != null && user.confirmCode != null) {
       var signUpModel = ConfirmSignUpModel(
         email: user.email!,

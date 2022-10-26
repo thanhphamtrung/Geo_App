@@ -39,7 +39,15 @@ dependencies:
   cupertino_icons: ^1.0.2
   amplify_flutter: ^0.6.9
   amplify_auth_cognito: ^0.6.9
+  amplify_datastore: ^0.6.9
+  amplify_api: ^0.6.9
   form_validator: ^1.0.3
+  geolocator: ^9.0.2
+  flutter_map: ^3.0.0
+  latlong2: ^0.8.1
+  geojson: ^1.0.0
+  dio: ^4.0.6
+  # flutter_osm_plugin: ^0.40.3
 
 dev_dependencies:
   flutter_test:
@@ -67,6 +75,7 @@ flutter:
   assets:
       - assets/images/
       - assets/images/icons/
+      - assets/data.json
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
